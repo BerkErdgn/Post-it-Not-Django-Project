@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+        {% if request.user.is_authenticated %}  
+        <div class="nav-scroller py-1 mb-2">
+                
+            <nav class="nav d-flex justify-content-between">
+                <a class="p-2 text-muted" href="{% url 'postitnotapp:index' %}">All</a>
+                {% for note in allNot %}
+                <a class="p-2 text-muted" href="{% url 'postitnotapp:subjectview' sybject=note.note_subject %}" name="subject">{{note.note_subject}}</a>
+                {% endfor %}
+            </nav>
+        </div>
+        
+        <div class="row">
+            {% for note in allNot %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                <div class="card text-white bg-warning" style="max-width: 18rem;">
+                    <div class="card-header">{{note.note_subject}}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{note.note_title}}</h5>
+                        <p class="card-text">{{note.note}}</p>
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'postitnotapp:delete' pk=note.pk %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+
+
+        {% else %}
+        <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+            <div class="card-header">Post it Note</div>
+            <div class="card-body">
+              <h5 class="card-title">Post it here</h5>
+              <p class="card-text">Now how would you like to write a note ?</p>
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'postitnotapp:singup' %}">Sign up</a>
+            </div>
+          </div>
+              
+        {% endif %}
+
+
+        
+
+
+
+{% endblock %}

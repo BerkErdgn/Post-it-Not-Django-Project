@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+
+<div class="row" style="margin: 40px; ">
+    <div class="col-md-6 offset-md-3">
+          <h3>Sing Up</h3>
+          <hr>
+          <form method = "POST" action="" >
+              {% csrf_token %}
+  
+              {{ form|crispy}}
+              <br>
+              <button type = "submit" class = "btn btn-danger">signup</button>
+  
+          </form>
+    
+    </div>
+  </div>
+
+
+{% endblock %}
